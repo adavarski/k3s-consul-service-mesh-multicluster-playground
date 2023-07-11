@@ -14,8 +14,6 @@ connected with a Mesh Gateway.
 
 <img src="pictures/consul-mesh-mesh-gateway.png?raw=true" width="1000">
 
-<img src="pictures/consul-mesh-POC.png?raw=true" width="1000">
-
 ### Setup k8s clusters
 ```
 ### Note: Two servers with IPs 192.168.1.99 & 100 with ssh & sudo configured 
@@ -121,8 +119,17 @@ Check Consul Mesh via Consul UI (Note: Not exposed as Load Balancer, because of 
 ```
 % kubectl port-forward -n consul service/consul-server 8500:8500
 ```
+<img src="pictures/consul-mesh-POC.png?raw=true" width="1000">
+
+
+
 <img src="pictures/k3s-consul-mesh-dc-1-services.png?raw=true" width="1000">
+
 <img src="pictures/k3s-consul-mesh-dc-2-services.png?raw=true" width="1000">
+
+
+
+
 
 Check apps
 ```
