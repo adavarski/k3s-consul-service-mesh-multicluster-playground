@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-IP=$(ifconfig eno0 | awk '/inet / {print $2}')
+IP=$(ifconfig eno1 | awk '/inet / {print $2}')
 
 curl -sfL https://get.k3s.io | \
 	INSTALL_K3S_EXEC="--disable helm-controller \
