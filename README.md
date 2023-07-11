@@ -107,13 +107,13 @@ consul-server-0.dc-2  10.42.0.11:8302  alive   server  1.15.1  2         dc-2  d
 
 $ kubectl exec statefulset/consul-server -n consul -- sh -c 'curl --silent --insecure https://localhost:8501/v1/catalog/service/mesh-gateway | jq ".[].ServiceTaggedAddresses.wan"'
 {
-  "Address": "192.168.1.100",
+  "Address": "192.168.1.99",
   "Port": 31001
 }
 $ export KUBECONFIG=~/.kube/config-k3s-2.yaml
 $ kubectl exec statefulset/consul-server -n consul -- sh -c 'curl --silent --insecure https://localhost:8501/v1/catalog/service/mesh-gateway | jq ".[].ServiceTaggedAddresses.wan"'
 {
-  "Address": "192.168.1.99",
+  "Address": "192.168.1.100",
   "Port": 31001
 }
 ```
