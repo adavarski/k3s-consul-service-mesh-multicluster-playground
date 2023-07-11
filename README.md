@@ -114,7 +114,11 @@ $ kubectl exec statefulset/consul-server -n consul -- sh -c 'curl --silent --ins
   "Port": 31001
 }
 $ export KUBECONFIG=~/.kube/config-k3s-2.yaml
-
+$ kubectl exec statefulset/consul-server -n consul -- sh -c 'curl --silent --insecure https://localhost:8501/v1/catalog/service/mesh-gateway | jq ".[].ServiceTaggedAddresses.wan"'
+{
+  "Address": "192.168.1.99",
+  "Port": 31001
+}
 ```
 Check Consul Mesh via Consul UI (Note: Not exposed as Load Balancer, because of security)
 ```
