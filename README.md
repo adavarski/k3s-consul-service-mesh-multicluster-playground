@@ -21,11 +21,9 @@ $ /usr/bin/ssh root@192.168.1.99  'bash -s' < install-k3s-1.sh > ~/.kube/config-
 $ /usr/bin/ssh root@192.168.1.100 'bash -s' < install-k3s-2.sh > ~/.kube/config-k3s-2.yaml
 ```
 
-Note: Networking must works between these 2 environment(k8s clusters). You can make this work however you like, depending on your own
-configuration, whether it’s VPC peering or VPN. For this playground we have connectivity between k3s-1 & k3s-2. For production for example between Azure AKS, GCP GKE we has to have connectivity between environments (k8s clusters) setuped via VPN (IPsec
-tunnels : Azure AKS <=> GKE GCP. Note: We have to use only secured communications between 2 environments, so VPN/VPC Peering/etc. must be setup.
+Note: Networking must works between these 2 environment (k8s clusters). You can make this work however you like, depending on your own configuration, whether it’s VPC peering or VPN. For production for example between Azure AKS, GCP GKE we has to have connectivity between environments (k8s clusters) setuped via VPN (IPsec tunnels : Azure AKS <=> GKE GCP. We have to use only secured communications between 2 environments, so VPN/VPC Peering/etc. must be setup. For this playground we have connectivity between k3s-1 & k3s-2 (k8s clusters in shared network).
 
-ote: Ports used by this setup (Ref: https://www.consul.io/docs/install/ports)
+Note: Ports used by this setup (Ref: https://www.consul.io/docs/install/ports)
 
 Port for the Federation
 ```
@@ -90,7 +88,7 @@ $ kubectl apply -f dashboard-deployment.yaml
 
 ```
 
-### Check Consul Mesh:
+### Check Consul Service Mesh:
 ```
 $ kubectl exec statefulset/consul-server -n consul -- consul catalog services -datacenter dc-1
 consul
@@ -125,6 +123,8 @@ Check Consul Mesh via Consul UI (Note: Not exposed as Load Balancer, because of 
 % kubectl port-forward -n consul service/consul-server 8500:8500
 ```
 
+Browser:
+
 <img src="pictures/k3s-consul-mesh-dc-1-services.png?raw=true" width="1000">
 
 <img src="pictures/k3s-consul-mesh-dc-2-services.png?raw=true" width="1000">
@@ -132,9 +132,15 @@ Check Consul Mesh via Consul UI (Note: Not exposed as Load Balancer, because of 
 
 Check apps
 ```
+$ export KUBECONFIG=~/.kube/config-k3s-1.yaml
+$ kubectl port-forward  service/counting 8080:80
+$ curl localhost:8080
+{"count":13,"hostname":"counting-service-74bddb55c9-8pc5v"}
+
 $ export KUBECONFIG=~/.kube/config-k3s-2.yaml
 $ kubectl port-forward  service/dashboard-service 8080:80
 ```
+Browser: 
 <img src="pictures/k3s-consul-mesh-counting-UI.png?raw=true" width="1000">
 
 Playground summary:
