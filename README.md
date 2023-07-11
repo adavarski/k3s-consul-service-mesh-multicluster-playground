@@ -140,6 +140,7 @@ $ export KUBECONFIG=~/.kube/config-k3s-2.yaml
 $ kubectl port-forward  service/dashboard-service 8080:80
 ```
 Browser: 
+
 <img src="pictures/k3s-consul-mesh-counting-UI.png?raw=true" width="1000">
 
 ### Playground summary:
