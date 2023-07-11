@@ -1,6 +1,6 @@
 ## Consul Service Mesh Playground 
 
-#### Objective: 
+### Objective: 
 In this playground, a Consul Cluster(one node for simplicity) is configured on Kubernetes cluster(k3s-1) and second
 Consul Cluster(one node for simplicity) on onother Kubernetes cluster (k3s-2). Using Mesh Gateway, it is possible to unify and configure the
 mTLS environment communication between different clusters and the traffic path between services. In addition, data in mTLS is not
