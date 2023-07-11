@@ -83,9 +83,9 @@ $ kubectl apply -f proxy-defaults.yaml
 ### Deploy apps
 
 ```
-$ export KUBECONFIG=~/.kube/config-k3s-2.yaml
-$ kubectl apply -f counting-deployment.yaml
 $ export KUBECONFIG=~/.kube/config-k3s-1.yaml
+$ kubectl apply -f counting-deployment.yaml
+$ export KUBECONFIG=~/.kube/config-k3s-2.yaml
 $ kubectl apply -f dashboard-deployment.yaml
 
 ```
