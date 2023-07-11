@@ -1,0 +1,50 @@
+global:
+  name: consul
+  datacenter: dc-2
+  tls:
+    enabled: true
+    verify: false
+    httpsOnly: false
+    caCert:
+      secretName: consul-federation
+      secretKey: caCert
+    caKey:
+      secretName: consul-federation
+      secretKey: caKey
+  federation:
+    enabled: true
+  gossipEncryption:
+    secretName: consul-federation
+    secretKey: gossipEncryptionKey
+server:
+  server:
+  replicas: 1
+  extraVolumes:
+    - type: secret
+      name: consul-federation
+      items:
+        - key: serverConfigJSON
+          path: config.json
+      load: true
+dns:
+  enabled: true
+client:
+  enabled: true
+  grpc: true
+ui:
+  enabled: true
+  service:
+    type: NodePort
+controller:
+  enabled: true
+connectInject:
+  enabled: true
+  default: true
+  centralConfig:
+    enabled: true
+meshGateway:
+  enabled: true
+  replicas: 1
+  service:
+    type: NodePort
+    nodePort: 31001

@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dashboard-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: dashboard-service
+  template:
+    metadata:
+      annotations:
+        consul.hashicorp.com/connect-inject: 'true'
+        consul.hashicorp.com/transparent-proxy: 'false'
+        consul.hashicorp.com/connect-service-upstreams: 'counting:8080'
+      labels:
+        name: dashboard-service
+    spec:
+      serviceAccountName: dashboard-service
+      containers:
+        - name: application
+          image: erenalidal/dashboard-service:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: COUNTING_SERVICE_URL
+              value: "http://localhost:8080"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-service
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    name: dashboard-service

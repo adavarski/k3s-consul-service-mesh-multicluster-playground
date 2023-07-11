@@ -1,0 +1,46 @@
+global:
+ name: consul
+ datacenter: dc-1
+ tls:
+  enabled: true
+  verify: false
+  httpsOnly: false
+ federation:
+  enabled: true
+  createFederationSecret: true
+ gossipEncryption:
+  secretName: consul-gossip-encryption-key
+  secretKey: key
+server:
+ replicas: 1
+ bootstrapExpect: 1
+ disruptionBudget:
+  enabled: true
+  maxUnavailable: 0
+ extraConfig: |
+  {
+    "ui_config": {
+    "enabled": true
+    }
+  }
+dns:
+ enabled: true
+client:
+ enabled: true
+ grpc: true
+ui:
+ enabled: true
+ service:
+  type: NodePort
+controller:
+  enabled: true
+connectInject:
+ enabled: true
+ default: true
+ centralConfig:
+  enabled: true
+meshGateway:
+ enabled: true
+ service:
+  type: NodePort
+  nodePort: 31001
