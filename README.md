@@ -24,7 +24,8 @@ $ /usr/bin/ssh root@192.168.1.100 'bash -s' < install-k3s-2.sh > ~/.kube/config-
 Note: Networking must works between these 2 environment(k8s clusters). You can make this work however you like, depending on your own
 configuration, whether it’s VPC peering or VPN. For this playground we have connectivity between k3s-1 & k3s-2. For production for example between Azure AKS, GCP GKE we has to have connectivity between environments (k8s clusters) setuped via VPN (IPsec
 tunnels : Azure AKS <=> GKE GCP. Note: We have to use only secured communications between 2 environments, so VPN/VPC Peering/etc. must be setup.
-Note: Ports used by this setup (Ref: https://www.consul.io/docs/install/ports)
+
+ote: Ports used by this setup (Ref: https://www.consul.io/docs/install/ports)
 
 Port for the Federation
 ```
