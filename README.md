@@ -124,16 +124,10 @@ Check Consul Mesh via Consul UI (Note: Not exposed as Load Balancer, because of 
 ```
 % kubectl port-forward -n consul service/consul-server 8500:8500
 ```
-<img src="pictures/consul-mesh-POC.png?raw=true" width="1000">
-
-
 
 <img src="pictures/k3s-consul-mesh-dc-1-services.png?raw=true" width="1000">
 
 <img src="pictures/k3s-consul-mesh-dc-2-services.png?raw=true" width="1000">
-
-
-
 
 
 Check apps
@@ -142,6 +136,10 @@ $ export KUBECONFIG=~/.kube/config-k3s-2.yaml
 $ kubectl port-forward  service/dashboard-service 8080:80
 ```
 <img src="pictures/k3s-consul-mesh-counting-UI.png?raw=true" width="1000">
+
+Playground summary:
+
+<img src="pictures/consul-mesh-POC.png?raw=true" width="1000">
 
 
 
